@@ -1,0 +1,30 @@
+{
+  "name": "koa-gzip-middleware",
+  "version": "1.0.0",
+  "description": "a gzip middleware for koa",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon ./test/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slashhuang/koa-gzip-middleware.git"
+  },
+  "keywords": [
+    "koa",
+    "gzip",
+    "middleware"
+  ],
+  "author": "slashhuang",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slashhuang/koa-gzip-middleware/issues"
+  },
+  "homepage": "https://github.com/slashhuang/koa-gzip-middleware#readme",
+  "dependencies": {
+    "koa": "^2.0.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
+}
