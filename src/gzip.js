@@ -7,7 +7,7 @@ const zlib = require('zlib');
 
 const G_middleware = (ctx,next)=>{
     //when body length is bigger than 20 ,trigger the use of gzip
-    if(ctx.body && ctx.body.length>20){
+    if(ctx.body && ctx.body.length>20 && ctx.status==200){
         let acceptEncoding = ctx.headers['accept-encoding'];
         let defalate = zlib.deflate;
         //gzip encoding head
