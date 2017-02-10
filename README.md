@@ -1,7 +1,11 @@
 # koa-gzip-middleware
 
 > simple gzip reponse string for koa2.
-> when request  headers support gzip or deflate and response content length is bigger than 20
+
+> when request  headers support gzip or deflate.
+
+> if response content length is bigger than 20.
+
 > koa-gzip-middleware would gzip the response body data syncronously
 
 ## Installation
