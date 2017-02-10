@@ -6,23 +6,13 @@ const fs = require('fs');
 const http = require('http');
 const zlib = require('zlib');
 const Koa = require('koa')
+// Koa application is now a class and requires the new operator.
 const app = new Koa();
-http.createServer(function(req, res) {
- var file = fs.createReadStream('package.json');
- var acceptEncoding = req.headers['accept-encoding'];
- if(acceptEncoding && acceptEncoding.indexOf('gzip') != -1) {
-  var gzipStream = zlib.createGzip();
-  // 设置返回头content-encoding为gzip
-  res.writeHead(200, {
-   "content-encoding": "gzip"
-  });
-  file.pipe(gzipStream)
-  .pipe(res);
- } else {
-  res.writeHead(200);
-  // 不压缩
-  file.pipe(res);
- }
-}).listen(8080);
+const Gzip = require('../src/gzip');
 
-console.log('server listening on port 8080')
+app.use(async ctx => {
+  ctx.body = 'hello world'; // ctx instead of this
+});
+app.use(Gzip);
+app.listen(3000);
+
