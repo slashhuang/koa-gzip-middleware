@@ -6,7 +6,7 @@
 //https://github.com/remy/nodemon/blob/master/doc/requireable.md
 const nodemon = require('nodemon');
 nodemon({
-  script: `${__dirname}/test.js`,
+  script: `${__dirname}/gzip.test.js`,
   ext: 'js json',
   execMap: {
         'js': 'babel-node'
@@ -21,8 +21,9 @@ nodemon({
 })
 .on('quit', function () {
   console.log('App has quit');
+  process.exit(1)
 })
 .on('restart', function (files) {
-  console.log('App restarted due to: ', files);
+  console.log('App restarted');
 });
 

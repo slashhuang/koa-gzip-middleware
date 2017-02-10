@@ -2,9 +2,10 @@
   "name": "koa-gzip-middleware",
   "version": "1.0.0",
   "description": "a gzip middleware for koa",
-  "main": "index.js",
+  "main": "src/gzip.js",
   "scripts": {
-    "test": "babel-node ./test/index.js"
+    "test": "babel-node ./test/index.js",
+    "common": "babel-node ./test/index.js"
   },
   "repository": {
     "type": "git",

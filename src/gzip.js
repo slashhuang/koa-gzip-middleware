@@ -6,28 +6,24 @@
 const zlib = require('zlib');
 
 const G_middleware = (ctx,next)=>{
-    if(ctx.body && ctx.status==200){
-            let acceptEncoding = ctx.headers['accept-encoding'];
-            let defalate = zlib.deflate;
-            //gzip encoding head
-            if(acceptEncoding && acceptEncoding.indexOf('gzip') != -1) {
-                 //set response content-encoding to gzip
-                 defalate()
-                 ctx.set({"content-encoding": "gzip"});
-            }
-
-            if (acceptEncoding.match(/\bdeflate\b/)) {
-                response.writeHead(200, { 'Content-Encoding': 'deflate' });
-                raw.pipe(zlib.createDeflate()).pipe(response);
-           } else if (acceptEncoding.match(/\bgzip\b/)) {
-                response.writeHead(200, { 'Content-Encoding': 'gzip' });
-                raw.pipe(zlib.createGzip()).pipe(response);
-          } else {
-                response.writeHead(200, {});
-                raw.pipe(response);
-          }
+    //when body length is bigger than 20 ,trigger the use of gzip
+    if(ctx.body && ctx.body.length>20){
+        let acceptEncoding = ctx.headers['accept-encoding'];
+        let defalate = zlib.deflate;
+        //gzip encoding head
+        if (acceptEncoding.match(/\bdeflate\b/)) {
+            ctx.set({ 'Content-Encoding': 'deflate' });
+            // deflate
+            ctx.body = zlib.deflateSync(ctx.body);
+        } else if (acceptEncoding.match(/\bgzip\b/)) {
+            ctx.set({'Content-Encoding': 'gzip'});
+            // gzip
+            ctx.body = zlib.gzipSync(ctx.body)
+        }
     }
     next();
 }
+
+module.exports = G_middleware
 
 
